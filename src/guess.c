@@ -1,13 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define BIGGEST_POSSIBLE_NUMBER 100;
+#define INITIAL_SCORE 1000;
 
 int main() {
   printf("***********************************\n");
   printf("* Welcome to our divination game! *\n");
   printf("***********************************\n");
 
-  int secretNumber = 42;
-  int attempts = 0;
+  srand(time(0));
+  int secretNumber = rand() % BIGGEST_POSSIBLE_NUMBER;
+  int attempts = 1;
 
+  float score = INITIAL_SCORE;
   // printf("The secret number is %d. Don't tell anyone :)\n", secretNumber);
 
   while (1) {
@@ -33,7 +40,12 @@ int main() {
     }
 
     attempts += 1;
+
+    float lostPoints = abs(input - secretNumber) / (float)2;
+    score = score - lostPoints;
   }
 
   printf("Thanks for participating. Hope you had some fun :)\n");
+
+  printf("You have an score of %.1f.\n", score);
 }
